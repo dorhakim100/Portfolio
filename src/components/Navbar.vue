@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar" :class="{ 'navbar--scrolled': scrolled }">
+  <nav
+    class="navbar"
+    :class="{ 'navbar--scrolled': scrolled }"
+  >
     <div class="container navbar-container">
-      <div class="navbar-brand">
-        <a href="#home" class="navbar-logo">Portfolio</a>
-      </div>
       <div class="navbar-right">
         <LanguageToggle />
         <button
@@ -16,8 +16,15 @@
           <span></span>
           <span></span>
         </button>
-        <ul class="navbar-menu" :class="{ 'navbar-menu--open': mobileMenuOpen }">
-          <li v-for="item in menuItems" :key="item.id" class="navbar-item">
+        <ul
+          class="navbar-menu"
+          :class="{ 'navbar-menu--open': mobileMenuOpen }"
+        >
+          <li
+            v-for="item in menuItems"
+            :key="item.id"
+            class="navbar-item"
+          >
             <a
               :href="item.href"
               class="navbar-link"
@@ -46,7 +53,7 @@ const menuItems = [
   { id: 1, key: 'nav.home', href: '#home' },
   { id: 2, key: 'nav.about', href: '#about' },
   { id: 3, key: 'nav.projects', href: '#projects' },
-  { id: 4, key: 'nav.contact', href: '#contact' }
+  { id: 4, key: 'nav.contact', href: '#contact' },
 ]
 
 const toggleMobileMenu = () => {
@@ -219,6 +226,17 @@ onUnmounted(() => {
         background: rgba(255, 255, 255, 0.1);
       }
     }
+  }
+
+  .navbar-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-menu {
+    background-color: transparent;
   }
 }
 </style>

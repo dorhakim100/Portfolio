@@ -1,5 +1,8 @@
 <template>
-  <Section id="contact" variant="accent">
+  <Section
+    id="contact"
+    variant="accent"
+  >
     <div class="contact">
       <div class="contact-header text-center fade-in">
         <h2 class="heading-2">{{ $t('contact.title') }}</h2>
@@ -10,7 +13,9 @@
 
       <div class="contact-content">
         <div class="contact-info slide-up">
-          <h3 class="heading-3 contact-section-title">{{ $t('contact.connect') }}</h3>
+          <h3 class="heading-3 contact-section-title">
+            {{ $t('contact.connect') }}
+          </h3>
           <p class="text-body contact-info-description">
             {{ $t('contact.connectDescription') }}
           </p>
@@ -18,24 +23,37 @@
           <div class="contact-links">
             <a
               v-for="link in socialLinks"
-              :key="link.name"
+              :key="link.name[locale]"
               :href="link.url"
               target="_blank"
               rel="noopener noreferrer"
               class="contact-link"
             >
-              <span class="contact-link-icon">{{ link.icon }}</span>
-              <span class="contact-link-text">{{ link.name }}</span>
+              <img
+                :src="link.icon"
+                alt="Social Icon"
+                class="contact-link-icon"
+              />
+              <span class="contact-link-text">{{ link.name[locale] }}</span>
             </a>
           </div>
         </div>
 
         <div class="contact-form-wrapper scale-in">
           <CustomCard class="contact-form-card">
-            <h3 class="heading-3 contact-form-title">{{ $t('contact.sendMessage') }}</h3>
-            <form class="contact-form" @submit.prevent="handleSubmit">
+            <h3 class="heading-3 contact-form-title text-primary">
+              {{ $t('contact.sendMessage') }}
+            </h3>
+            <form
+              class="contact-form"
+              @submit.prevent="handleSubmit"
+            >
               <div class="contact-form-group">
-                <label for="name" class="contact-label">{{ $t('contact.name') }}</label>
+                <label
+                  for="name"
+                  class="contact-label"
+                  >{{ $t('contact.name') }}</label
+                >
                 <input
                   id="name"
                   v-model="form.name"
@@ -47,7 +65,11 @@
               </div>
 
               <div class="contact-form-group">
-                <label for="email" class="contact-label">{{ $t('contact.email') }}</label>
+                <label
+                  for="email"
+                  class="contact-label"
+                  >{{ $t('contact.email') }}</label
+                >
                 <input
                   id="email"
                   v-model="form.email"
@@ -59,7 +81,11 @@
               </div>
 
               <div class="contact-form-group">
-                <label for="message" class="contact-label">{{ $t('contact.message') }}</label>
+                <label
+                  for="message"
+                  class="contact-label"
+                  >{{ $t('contact.message') }}</label
+                >
                 <textarea
                   id="message"
                   v-model="form.message"
@@ -70,7 +96,12 @@
                 ></textarea>
               </div>
 
-              <CustomButton variant="primary" size="lg" type="submit" :full-width="true">
+              <CustomButton
+                variant="primary"
+                size="lg"
+                type="submit"
+                :full-width="true"
+              >
                 {{ $t('contact.submit') }}
               </CustomButton>
             </form>
@@ -88,19 +119,35 @@ import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const form = ref({
   name: '',
   email: '',
-  message: ''
+  message: '',
 })
 
 const socialLinks = [
-  { name: 'Email', icon: '📧', url: 'mailto:your.email@example.com' },
-  { name: 'GitHub', icon: '💻', url: 'https://github.com' },
-  { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com' },
-  { name: 'Twitter', icon: '🐦', url: 'https://twitter.com' }
+  {
+    name: { en: 'Phone', he: 'טלפון' },
+    icon: '/public/phone.svg',
+    url: 'tel:+972542044022',
+  },
+  {
+    name: { en: 'WhatsApp', he: 'וואטסאפ' },
+    icon: '/public/whatsapp.svg',
+    url: 'https://wa.me/972542044022',
+  },
+  {
+    name: { en: 'GitHub', he: 'גיטהאב' },
+    icon: '/public/github.svg',
+    url: 'https://github.com/dorhakim100',
+  },
+  {
+    name: { en: 'LinkedIn', he: 'לינקדאין' },
+    icon: '/public/linkedin.svg',
+    url: 'https://www.linkedin.com/in/dor-hakim/',
+  },
 ]
 
 const handleSubmit = () => {
@@ -188,7 +235,9 @@ const handleSubmit = () => {
   }
 
   &-link-icon {
-    font-size: $font-size-2xl;
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
   }
 
   &-link-text {

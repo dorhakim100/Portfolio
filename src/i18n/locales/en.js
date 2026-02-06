@@ -1,5 +1,6 @@
 export default {
   nav: {
+    siteName: 'Portfolio',
     home: 'Home',
     about: 'About',
     projects: 'Projects',
@@ -27,9 +28,9 @@ export default {
     skills: 'Skills & Technologies',
   },
   projects: {
-    title: 'Featured Projects',
+    title: 'My Best Projects',
     description:
-      "A selection of projects I've worked on. Each one represents a unique challenge and solution.",
+      'Some of the projects are for clients, and some are personal self learning projects.',
   },
   contact: {
     title: 'Get In Touch',

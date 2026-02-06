@@ -16,6 +16,7 @@
           <h3 class="heading-3 about-section-title">
             {{ $t('about.journey') }}
           </h3>
+
           <p class="text-body about-paragraph">
             {{ $t('about.journeyText1') }}
           </p>
@@ -63,16 +64,16 @@ import CustomButton from './CustomButton.vue'
 
 const skills = ref([
   {
-    name: 'React',
-    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg',
+    name: 'JavaScript',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
   },
   {
     name: 'TypeScript',
     icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
   },
   {
-    name: 'JavaScript',
-    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
+    name: 'React',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg',
   },
   {
     name: 'Node.js',

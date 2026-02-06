@@ -109,7 +109,7 @@ const projects = ref([
     title: { en: 'MyTracker', he: 'MyTracker' },
     description: {
       en: 'A multi client platform developed for a trainer to manage his trainees, their workouts and calories intake. The platform consists of two client sides sharing the same backend, trainer web dashboard, and mobile app.',
-      he: 'מערכת שפותחה עבור מאמן לניהול המתאמנים שלו. למערכת שני צדדי לקוח שמחוברים לאותו צד שרת. אפליקציה למתאמנים ודאשבורד למאמן.',
+      he: 'מערכת שפותחה עבור מאמן לניהול המתאמנים שלו. למערכת שני צדדי לקוח שמחוברים לאותו צד שרת. אפליקציה למתאמנים ודאשבורד למאמן. ניהול אימונים, ספירת קלוריות, מעקב אחרי משקלי עבודה ומשקל גוף.',
     },
     img: '/public/mytracker.png',
     tags: ['React', 'Typescript', 'Node.js', 'MongoDB'],
@@ -159,6 +159,9 @@ const openLink = (url) => {
     }
   }
 
+  .projects-card {
+  }
+
   .projects-card-image {
     border-radius: $radius-md;
     display: flex;
@@ -186,7 +189,7 @@ const openLink = (url) => {
     gap: $spacing-lg;
 
     @include respond-to(sm) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
     }
 
     @include respond-to(lg) {

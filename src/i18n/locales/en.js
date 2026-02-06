@@ -55,7 +55,8 @@ export default {
     copyright: 'All rights reserved.',
   },
   common: {
-    liveDemo: 'Live Demo',
-    github: 'GitHub',
+    link: 'Link',
+    frontend: 'Frontend',
+    backend: 'Backend',
   },
 }

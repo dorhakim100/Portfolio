@@ -1,5 +1,8 @@
 <template>
-  <Section id="projects" variant="dark">
+  <Section
+    id="projects"
+    variant="dark"
+  >
     <div class="projects">
       <div class="projects-header text-center fade-in">
         <h2 class="heading-2">{{ $t('projects.title') }}</h2>
@@ -17,16 +20,19 @@
         >
           <template #header>
             <div class="projects-card-image">
-              <div class="projects-image-placeholder">
-                {{ project.icon }}
-              </div>
+              <img
+                :src="project.img"
+                alt="Project Image"
+              />
             </div>
           </template>
 
           <template #default>
-            <h3 class="heading-3 projects-card-title">{{ project.title }}</h3>
-            <p class="text-body projects-card-description">
-              {{ project.description }}
+            <h3 class="heading-3 projects-card-title text-primary">
+              {{ project.title[locale] }}
+            </h3>
+            <p class="text-body projects-card-description text-secondary">
+              {{ project.description[locale] }}
             </p>
             <div class="projects-tags">
               <span
@@ -41,11 +47,27 @@
 
           <template #footer>
             <div class="projects-card-actions">
-              <CustomButton variant="outline" size="sm" @click="openLink(project.demo)">
-                {{ $t('common.liveDemo') }}
+              <CustomButton
+                variant="outline"
+                size="sm"
+                @click="openLink(project.frontend)"
+              >
+                {{ $t('common.frontend') }}
               </CustomButton>
-              <CustomButton variant="ghost" size="sm" @click="openLink(project.github)">
-                {{ $t('common.github') }}
+              <CustomButton
+                variant="outline"
+                size="sm"
+                @click="openLink(project.backend)"
+              >
+                {{ $t('common.backend') }}
+              </CustomButton>
+              <CustomButton
+                variant="ghost"
+                size="sm"
+                @click="openLink(project.link)"
+                v-if="project.link"
+              >
+                {{ $t('common.link') }}
               </CustomButton>
             </div>
           </template>
@@ -60,62 +82,60 @@ import { ref } from 'vue'
 import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
 
 const projects = ref([
   {
-    id: 1,
-    title: 'E-Commerce Platform',
-    description: 'A full-featured e-commerce solution with cart, checkout, and payment integration.',
-    icon: '🛒',
-    tags: ['Vue.js', 'Node.js', 'MongoDB'],
-    demo: '#',
-    github: '#'
+    id: 2,
+    title: {
+      en: 'Sport Club E-Commerce and CRM',
+      he: 'מערכת ניהול עסק וחנות אינטרנטית למועדון ספורט',
+    },
+    description: {
+      en: 'An e-commerce and CRM platform developed for a sport club to manage their internal workflow, classes schedule, leads and E-commerce sales. The platform resulted in over 300% increase in customer engagement compared to the previous system.',
+      he: 'מערכת ניהול עסק וחנות אינטרנטית למועדון ספורט. המערכת אחראית לניהול תהליכי עבודה פנימיים, מערכת שעות, לידים ומכירות אינטרנטיות. המערכת הובילה לעלייה של יותר מ300% בלידים הנכנסים לעומת המערכת הקודמת.',
+    },
+    img: '/public/sportclub.webp',
+    tags: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
+    link: '#',
+    frontend: 'https://github.com/dorhakim100/Sport-Club-Front',
+    backend: 'https://github.com/dorhakim100/SportClub-BackEnd',
+    link: 'https://www.moadonsport.com',
   },
   {
-    id: 2,
-    title: 'Task Management App',
-    description: 'A collaborative task management tool with real-time updates and team collaboration.',
-    icon: '✅',
-    tags: ['React', 'Firebase', 'TypeScript'],
-    demo: '#',
-    github: '#'
+    id: 1,
+    title: { en: 'MyTracker', he: 'MyTracker' },
+    description: {
+      en: 'A multi client platform developed for a trainer to manage his trainees, their workouts and calories intake. The platform consists of two client sides sharing the same backend, trainer web dashboard, and mobile app.',
+      he: 'מערכת שפותחה עבור מאמן לניהול המתאמנים שלו. למערכת שני צדדי לקוח שמחוברים לאותו צד שרת. אפליקציה למתאמנים ודאשבורד למאמן.',
+    },
+    img: '/public/mytracker.png',
+    tags: ['React', 'Typescript', 'Node.js', 'MongoDB'],
+    frontend: 'https://github.com/dorhakim100/MyTracker-Front',
+    backend: 'https://github.com/dorhakim100/MyTracker-Back',
   },
   {
     id: 3,
-    title: 'Weather Dashboard',
-    description: 'Beautiful weather dashboard with location-based forecasts and interactive maps.',
-    icon: '🌤️',
-    tags: ['Vue.js', 'API', 'SCSS'],
-    demo: '#',
-    github: '#'
+    title: { en: 'CamJam', he: 'CamJam' },
+    description: {
+      en: 'A web based platform, to have live video calls and chat rooms. Built with React, TypeScript, WebRTC and Socket.io.',
+      he: `פרויקט אישי לשיחות וידאו וחדרי צ'אט בזמן אמת. בנוי ב-React, TypeScript, WebRTC ו-Socket.io.`,
+    },
+    img: '/public/camjam.png',
+    tags: [
+      'React',
+      'TypeScript',
+      'WebRTC',
+      'Socket.io',
+      'Node.js',
+      'PostgreSQL',
+    ],
+
+    frontend: 'https://github.com/dorhakim100/CamJam-Front',
+    backend: 'https://github.com/dorhakim100/CamJam-Back',
   },
-  {
-    id: 4,
-    title: 'Social Media Analytics',
-    description: 'Analytics platform for tracking social media performance and engagement metrics.',
-    icon: '📊',
-    tags: ['React', 'Python', 'Chart.js'],
-    demo: '#',
-    github: '#'
-  },
-  {
-    id: 5,
-    title: 'Portfolio Website',
-    description: 'Modern, responsive portfolio website with smooth animations and great UX.',
-    icon: '💼',
-    tags: ['Vue.js', 'SCSS', 'Vite'],
-    demo: '#',
-    github: '#'
-  },
-  {
-    id: 6,
-    title: 'Chat Application',
-    description: 'Real-time chat application with rooms, file sharing, and emoji support.',
-    icon: '💬',
-    tags: ['Vue.js', 'Socket.io', 'Express'],
-    demo: '#',
-    github: '#'
-  }
 ])
 
 const openLink = (url) => {
@@ -139,6 +159,18 @@ const openLink = (url) => {
     }
   }
 
+  .projects-card-image {
+    border-radius: $radius-md;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 200px;
+      object-fit: cover;
+      border-radius: $radius-md;
+    }
+  }
   &-card-title {
     margin-bottom: $spacing-sm;
   }
@@ -149,6 +181,7 @@ const openLink = (url) => {
 
   &-grid {
     display: grid;
+
     grid-template-columns: 1fr;
     gap: $spacing-lg;
 
@@ -177,7 +210,11 @@ const openLink = (url) => {
   &-image-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    background: linear-gradient(
+      135deg,
+      $primary-color 0%,
+      $secondary-color 100%
+    );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,6 +222,7 @@ const openLink = (url) => {
   }
 
   &-tags {
+    align-self: end;
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-xs;

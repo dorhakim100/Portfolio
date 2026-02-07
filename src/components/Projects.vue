@@ -92,12 +92,16 @@
         frameborder="0"
         allowfullscreen=""
         title="Embedded post"
+        class="scroll-in-up opacity-animation"
+        v-scroll-in
       ></iframe>
 
       <div
         v-for="image in images"
         :key="image.id"
-        :class="image.class"
+        class="scroll-in-up opacity-animation"
+        :class="`scroll-in-${image.scroll} ${image.class}`"
+        v-scroll-in
       >
         <h5>{{ image.title[locale] }}</h5>
         <img
@@ -130,6 +134,7 @@ const images = [
       he: 'MyTracker - דאשבורד למאמן',
     },
     class: 'dashboard',
+    scroll: 'up',
   },
   {
     id: 2,
@@ -139,12 +144,14 @@ const images = [
       he: 'MyTracker - עמוד פרטי תרגיל',
     },
     class: 'exercise-details',
+    scroll: 'right',
   },
   {
     id: 3,
     img: '/Food Details.png',
     title: { en: 'MyTracker - Food Details', he: 'MyTracker - עמוד פרטי מזון' },
     class: 'food-details',
+    scroll: 'left',
   },
 ]
 
@@ -353,7 +360,7 @@ const openLink = (url) => {
     // height: 100%;
     @media (max-width: $breakpoint-xl) {
       grid-row: 3 / 4;
-      grid-column: 1 / 2;
+      grid-column: 3 / -1;
     }
     @media (max-width: $breakpoint-md) {
       grid-row: 2 / 3;
@@ -366,7 +373,7 @@ const openLink = (url) => {
     // height: 100%;
     @media (max-width: $breakpoint-xl) {
       grid-row: 3 / 4;
-      grid-column: 3 / -1;
+      grid-column: 1 / 2;
     }
 
     @media (max-width: $breakpoint-md) {

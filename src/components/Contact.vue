@@ -47,54 +47,30 @@
             <form
               class="contact-form"
               @submit.prevent="handleSubmit"
+              ref="form"
             >
-              <div class="contact-form-group">
-                <label
-                  for="name"
-                  class="contact-label"
-                  >{{ $t('contact.name') }}</label
-                >
-                <input
-                  id="name"
-                  v-model="form.name"
-                  type="text"
-                  class="contact-input"
-                  :placeholder="$t('contact.namePlaceholder')"
-                  required
-                />
-              </div>
+              <input
+                v-model="formValues.name"
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+              />
 
-              <div class="contact-form-group">
-                <label
-                  for="email"
-                  class="contact-label"
-                  >{{ $t('contact.email') }}</label
-                >
-                <input
-                  id="email"
-                  v-model="form.email"
-                  type="email"
-                  class="contact-input"
-                  :placeholder="$t('contact.emailPlaceholder')"
-                  required
-                />
-              </div>
+              <input
+                v-model="formValues.email"
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
 
-              <div class="contact-form-group">
-                <label
-                  for="message"
-                  class="contact-label"
-                  >{{ $t('contact.message') }}</label
-                >
-                <textarea
-                  id="message"
-                  v-model="form.message"
-                  class="contact-textarea"
-                  rows="5"
-                  :placeholder="$t('contact.messagePlaceholder')"
-                  required
-                ></textarea>
-              </div>
+              <textarea
+                v-model="formValues.message"
+                name="message"
+                placeholder="Your Message"
+                required
+              />
 
               <CustomButton
                 variant="primary"
@@ -119,14 +95,23 @@ import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 import emailjs from '@emailjs/browser'
+import Button from 'primevue/button'
 
 const { t, locale } = useI18n()
 
-const form = ref({
+const form = ref(null)
+
+const formValues = ref({
   name: '',
   email: '',
   message: '',
 })
+
+const isLoading = ref(false)
+
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 const socialLinks = [
   {
@@ -152,13 +137,25 @@ const socialLinks = [
 ]
 
 const handleSubmit = async () => {
+  isLoading.value = true
   // Handle form submission
   console.log('Form submitted:', form.value)
   // alert(t('contact.submitSuccess'))
+
   try {
-    const res = await emailjs.sendForm()
-    form.value = { name: '', email: '', message: '' }
-  } catch (err) {}
+    const res = await emailjs.sendForm(
+      serviceId,
+      templateId,
+      form.value,
+      publicKey
+    )
+
+    formValues.value = { name: '', email: '', message: '' }
+  } catch (err) {
+    console.error('Email sending failed:', err)
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -248,26 +245,26 @@ const handleSubmit = async () => {
     font-weight: $font-weight-medium;
   }
 
-  &-form {
+  form {
     display: flex;
     flex-direction: column;
     gap: $spacing-md;
   }
 
-  &-form-group {
+  .form-group {
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
   }
 
-  &-label {
+  label {
     font-weight: $font-weight-medium;
     color: $text-primary;
     font-size: $font-size-sm;
   }
 
-  &-input,
-  &-textarea {
+  input,
+  textarea {
     padding: $spacing-sm $spacing-md;
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: $radius-md;
@@ -287,7 +284,7 @@ const handleSubmit = async () => {
     }
   }
 
-  &-textarea {
+  textarea {
     resize: vertical;
     min-height: 120px;
   }

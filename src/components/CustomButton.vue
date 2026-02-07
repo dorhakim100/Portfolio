@@ -1,33 +1,54 @@
 <template>
   <button
-    :class="['custom-button', `custom-button--${variant}`, `custom-button--${size}`, { 'custom-button--full-width': fullWidth }]"
+    :class="[
+      'custom-button',
+      `custom-button--${variant}`,
+      `custom-button--${size}`,
+      { 'custom-button--full-width': fullWidth },
+    ]"
     :type="type"
     @click="$emit('click', $event)"
   >
+    <CustomSpinner
+      v-if="loading && prefs.lang === 'en'"
+      size="20px"
+    />
     <slot></slot>
+    <CustomSpinner
+      v-if="loading && prefs.lang === 'he'"
+      size="20px"
+    />
   </button>
 </template>
 
 <script setup>
+import CustomSpinner from './CustomSpinner.vue'
+import { usePreferences } from '../composables/usePreferences'
+const { prefs } = usePreferences()
 defineProps({
   variant: {
     type: String,
     default: 'primary',
-    validator: (value) => ['primary', 'secondary', 'outline', 'ghost'].includes(value)
+    validator: (value) =>
+      ['primary', 'secondary', 'outline', 'ghost'].includes(value),
   },
   size: {
     type: String,
     default: 'md',
-    validator: (value) => ['sm', 'md', 'lg'].includes(value)
+    validator: (value) => ['sm', 'md', 'lg'].includes(value),
   },
   fullWidth: {
     type: Boolean,
-    default: false
+    default: false,
   },
   type: {
     type: String,
-    default: 'button'
-  }
+    default: 'button',
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 defineEmits(['click'])
@@ -39,6 +60,7 @@ defineEmits(['click'])
 
 .custom-button {
   display: inline-flex;
+  gap: $spacing-xs;
   align-items: center;
   justify-content: center;
   font-weight: $font-weight-medium;

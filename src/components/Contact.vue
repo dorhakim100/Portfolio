@@ -53,7 +53,7 @@
                 v-model="formValues.name"
                 type="text"
                 name="name"
-                placeholder="Your Name"
+                :placeholder="$t('contact.namePlaceholder')"
                 required
               />
 
@@ -61,14 +61,14 @@
                 v-model="formValues.email"
                 type="email"
                 name="email"
-                placeholder="Your Email"
+                placeholder="youremail@example.com"
                 required
               />
 
               <textarea
                 v-model="formValues.message"
                 name="message"
-                placeholder="Your Message"
+                :placeholder="$t('contact.messagePlaceholder')"
                 required
               />
 
@@ -77,6 +77,7 @@
                 size="lg"
                 type="submit"
                 :full-width="true"
+                :loading="isLoading"
               >
                 {{ $t('contact.submit') }}
               </CustomButton>
@@ -95,7 +96,6 @@ import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 import emailjs from '@emailjs/browser'
-import Button from 'primevue/button'
 
 const { t, locale } = useI18n()
 
@@ -138,9 +138,6 @@ const socialLinks = [
 
 const handleSubmit = async () => {
   isLoading.value = true
-  // Handle form submission
-  console.log('Form submitted:', form.value)
-  // alert(t('contact.submitSuccess'))
 
   try {
     const res = await emailjs.sendForm(
@@ -272,6 +269,7 @@ const handleSubmit = async () => {
     font-size: $font-size-base;
     transition: all $transition-fast;
     background: white;
+    color: $text-primary;
 
     &:focus {
       outline: none;

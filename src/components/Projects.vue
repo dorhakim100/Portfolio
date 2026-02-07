@@ -143,7 +143,7 @@ const openLink = (url) => {
 @import '../styles/mixins';
 
 .projects-container {
-  // layout
+  padding-top: $spacing-md;
 }
 
 .projects-header {

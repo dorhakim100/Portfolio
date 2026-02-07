@@ -75,6 +75,17 @@ a {
   transition: color $transition-fast;
 }
 
+// Text selection (marked/highlighted text) — custom background app-wide
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(99, 102, 241, 0.25);
+  color: inherit;
+}
+
 // Focus styles for accessibility
 :focus-visible {
   outline: 2px solid $primary-color;

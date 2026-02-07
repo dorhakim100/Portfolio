@@ -1,27 +1,51 @@
 <template>
-  <Section id="about" variant="default">
+  <Section
+    id="about"
+    variant="default"
+  >
     <div class="about-container">
       <header class="about-header text-center fade-in">
         <h2 class="heading-2">{{ $t('about.title') }}</h2>
-        <p class="text-body about-header-description">{{ $t('about.description') }}</p>
+        <p class="text-body about-header-description">
+          {{ $t('about.description') }}
+        </p>
       </header>
 
       <div class="about-content">
         <div class="about-text slide-up">
-          <h3 class="heading-3 about-section-title">{{ $t('about.journey') }}</h3>
-          <p class="text-body about-paragraph">{{ $t('about.journeyText1') }}</p>
-          <p class="text-body about-paragraph about-paragraph-last">{{ $t('about.journeyText2') }}</p>
-          <CustomButton variant="primary" @click="scrollToSection('contact')">
+          <h3 class="heading-3 about-section-title">
+            {{ $t('about.journey') }}
+          </h3>
+          <p class="text-body about-paragraph">
+            {{ $t('about.journeyText1') }}
+          </p>
+          <p class="text-body about-paragraph about-paragraph-last">
+            {{ $t('about.journeyText2') }}
+          </p>
+          <CustomButton
+            variant="primary"
+            @click="scrollToSection('contact')"
+          >
             {{ $t('about.connect') }}
           </CustomButton>
         </div>
 
         <div class="about-skills scale-in">
-          <h3 class="heading-3 about-section-title">{{ $t('about.skills') }}</h3>
+          <h3 class="heading-3 about-section-title">
+            {{ $t('about.skills') }}
+          </h3>
           <div class="about-skills-grid">
-            <div v-for="skill in skills" :key="skill.name" class="about-skill-item">
+            <div
+              v-for="skill in skills"
+              :key="skill.name"
+              class="about-skill-item"
+            >
               <div class="about-skill-icon">
-                <img :src="skill.icon" :alt="skill.name" class="about-skill-image" />
+                <img
+                  :src="skill.icon"
+                  :alt="skill.name"
+                  class="about-skill-image"
+                />
               </div>
               <span class="about-skill-name">{{ skill.name }}</span>
             </div>
@@ -38,15 +62,42 @@ import Section from './Section.vue'
 import CustomButton from './CustomButton.vue'
 
 const skills = ref([
-  { name: 'JavaScript', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg' },
-  { name: 'TypeScript', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg' },
-  { name: 'React', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg' },
-  { name: 'Node.js', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg' },
-  { name: 'Express', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg' },
-  { name: 'Vue.js', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg' },
-  { name: 'MongoDB', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg' },
-  { name: 'PostgreSQL', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg' },
-  { name: 'Redis', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg' },
+  {
+    name: 'JavaScript',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg',
+  },
+  {
+    name: 'TypeScript',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg',
+  },
+  {
+    name: 'React',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg',
+  },
+  {
+    name: 'Node.js',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg',
+  },
+  {
+    name: 'Express',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg',
+  },
+  {
+    name: 'Vue.js',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg',
+  },
+  {
+    name: 'MongoDB',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg',
+  },
+  {
+    name: 'PostgreSQL',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg',
+  },
+  {
+    name: 'Redis',
+    icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg',
+  },
 ])
 
 const scrollToSection = (sectionId) => {
@@ -60,6 +111,7 @@ const scrollToSection = (sectionId) => {
 @import '../styles/mixins';
 
 .about-container {
+  padding-top: $spacing-md;
   // layout
 }
 
@@ -118,14 +170,16 @@ const scrollToSection = (sectionId) => {
   border-radius: $radius-lg;
   transition: all $transition-base;
   .dark-mode & {
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, #4facfe2f, #6ec0ff5b, #8fd2f438);
+    box-shadow: 0 0 25px rgba(79, 172, 254, 0.075);
   }
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-md;
     background: white;
     .dark-mode & {
-      background: rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, #4facfe38, #6ec0ff63, #8fd2f43f);
+      box-shadow: 0 0 25px rgba(79, 172, 254, 0.14);
     }
   }
 }

@@ -7,7 +7,7 @@
       <a
         href="#home"
         class="navbar-logo"
-        >Portfolio</a
+        >{{ $t('nav.siteName') }}</a
       >
       <div class="navbar-right">
         <LanguageToggle />
@@ -104,6 +104,7 @@ onUnmounted(() => {
 
 .navbar-container {
   @include flex-between;
+  gap: $spacing-md;
   padding-top: $spacing-md;
   padding-bottom: $spacing-md;
 }

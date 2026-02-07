@@ -9,23 +9,23 @@ export default {
   hero: {
     title: "Hi, I'm",
     name: 'Dor Hakim',
-    subtitle: 'Full Stack Developer',
+    subtitle: 'Developer who loves what he does.',
     description:
-      'I create beautiful, functional, and user-centered digital experiences. Passionate about clean code and modern web technologies.',
+      'Ever since i was a kid, i was a tech guy. I love solving problems and creating something out of nothing.',
     viewWork: 'View My Work',
     getInTouch: 'Get In Touch',
   },
   about: {
     title: 'About Me',
     description:
-      "I'm a passionate developer who loves creating digital experiences that make a difference.",
-    journey: 'My Journey',
+      'A developer with hands on experience with building systems from scratch, maintaining existing code and teaching junior developers.',
+    journey: 'What I do',
     journeyText1:
-      "With a passion for technology and design, I've been building web applications that combine beautiful interfaces with robust functionality. I specialize in modern JavaScript frameworks and love working on projects that challenge me to grow.",
+      "I'm a big fan of clean, readable code. Good architecture and deep understanding of the system are the foundation for building quality code.",
     journeyText2:
-      "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
+      "When I'm not coding, you can find me training or hanging out with friends. At work, I'm the cat guy, but I also have a dog :)",
     connect: "Let's Connect",
-    skills: 'Skills & Technologies',
+    skills: 'Technical Skills',
   },
   projects: {
     title: 'My Best Projects',
@@ -34,11 +34,10 @@ export default {
   },
   contact: {
     title: 'Get In Touch',
-    description:
-      "Have a project in mind or want to collaborate? I'd love to hear from you!",
-    connect: "Let's Connect",
+    description: "Want to collaborate? I'd love to hear from you!",
+    connect: 'Links',
     connectDescription:
-      "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out through any of these channels.",
+      "I'm not a social media guy, but I have the necessary platforms to reach me :)",
     sendMessage: 'Send a Message',
     name: 'Name',
     namePlaceholder: 'Your name',

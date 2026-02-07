@@ -141,7 +141,7 @@ const handleSubmit = async () => {
 @import '../styles/mixins';
 
 .contact-container {
-  // layout
+  padding-top: $spacing-md;
 }
 
 .contact-header {
@@ -183,6 +183,7 @@ const handleSubmit = async () => {
   flex: 1;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
+  max-width: 500px;
 }
 
 .contact-links {
@@ -192,6 +193,7 @@ const handleSubmit = async () => {
 }
 
 .contact-link {
+  max-width: 500px;
   display: flex;
   align-items: center;
   gap: $spacing-md;

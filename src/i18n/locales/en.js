@@ -12,6 +12,7 @@ export default {
     subtitle: 'Full Stack Developer who loves what he does.',
     description:
       'Ever since i was a kid, i was a tech guy. I love solving problems and creating something out of nothing.',
+    lookingFor: `I'm looking for a new challenge, Full Stack / Frontend / Backend roles, full time or part time.`,
     viewWork: 'View My Work',
     getInTouch: 'Get In Touch',
   },

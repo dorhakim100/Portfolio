@@ -4,6 +4,11 @@
     variant="default"
   >
     <div class="about-container">
+      <img
+        :src="pixelArt"
+        alt="Pixel Art"
+        class="about-header-image"
+      />
       <header
         class="about-header text-center scroll-in-up opacity-animation"
         v-scroll-in
@@ -71,6 +76,7 @@
 import { ref } from 'vue'
 import Section from './Section.vue'
 import CustomButton from './CustomButton.vue'
+import pixelArt from '/pixel-art.jpeg'
 
 const skills = ref([
   {
@@ -128,15 +134,60 @@ const scrollToSection = (sectionId) => {
     padding-top: calc(5em + $spacing-md);
   }
   // layout
+  position: relative;
+
+  .about-header-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    object-fit: scale-down;
+
+    filter: blur(2.5px);
+    opacity: 1;
+  }
 }
 
 .about-header {
   margin-bottom: $spacing-2xl;
+  padding: $spacing-lg $spacing-md;
+  border-radius: $radius-lg;
+  position: relative;
+  isolation: isolate;
+  // Frosted overlay: image shows through but blurred for text readability
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.58) 45%,
+    rgba(255, 255, 255, 0.52) 100%
+  );
+  backdrop-filter: blur(5px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  // Soft shadow that blends with the image
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 20px 0 rgba(0, 0, 0, 0.06), 0 4px 24px -4px rgba(0, 0, 0, 0.08);
+
+  .dark-mode & {
+    background: linear-gradient(
+      180deg,
+      rgba(17, 24, 39, 0.82) 0%,
+      rgba(17, 24, 39, 0.68) 45%,
+      rgba(17, 24, 39, 0.62) 100%
+    );
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+      inset 0 -1px 20px 0 rgba(0, 0, 0, 0.2),
+      0 4px 24px -4px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .about-header-description {
   max-width: 600px;
   margin: $spacing-md auto 0;
+  color: $text-primary;
+  .dark-mode & {
+    color: white;
+  }
 }
 
 .about-section-title {

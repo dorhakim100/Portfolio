@@ -15,6 +15,7 @@
           </h1>
           <h2 class="hero-subtitle">{{ $t('hero.subtitle') }}</h2>
           <p class="hero-description text-body">{{ $t('hero.description') }}</p>
+          <p class="hero-looking-for text-body">{{ $t('hero.lookingFor') }}</p>
           <div class="hero-actions">
             <CustomButton
               variant="primary"
@@ -161,13 +162,16 @@ const scrollToSection = (sectionId) => {
   }
 }
 
-.hero-description {
-  margin-bottom: $spacing-xl;
+.hero-description,
+.hero-looking-for {
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   .dark-mode & {
     color: rgba(255, 255, 255, 0.8);
+  }
+  &:last-of-type {
+    margin-bottom: $spacing-xl;
   }
   @include respond-to(md) {
     margin-left: 0;

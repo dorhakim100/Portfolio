@@ -33,6 +33,10 @@ export default {
     description:
       'This selection of projects contains both projects for clients and personal self learning projects.',
   },
+  media: {
+    title: 'Media',
+    description: 'Below is media and screenshots of my projects.',
+  },
   contact: {
     title: 'Get In Touch',
     description: "Want to collaborate? I'd love to hear from you!",

@@ -75,6 +75,37 @@
         </CustomCard>
       </div>
     </div>
+    <header
+      class="media-header text-center scroll-in-up opacity-animation"
+      v-scroll-in
+    >
+      <h2 class="heading-2">{{ $t('media.title') }}</h2>
+      <p class="text-body media-header-description">
+        {{ $t('media.description') }}
+      </p>
+    </header>
+    <div class="media-container">
+      <iframe
+        :src="linkedInUrl"
+        height="770"
+        width="100%"
+        frameborder="0"
+        allowfullscreen=""
+        title="Embedded post"
+      ></iframe>
+
+      <div
+        v-for="image in images"
+        :key="image.id"
+        :class="image.class"
+      >
+        <h5>{{ image.title[locale] }}</h5>
+        <img
+          :src="image.img"
+          :alt="image.title[locale]"
+        />
+      </div>
+    </div>
   </Section>
 </template>
 
@@ -86,6 +117,36 @@ import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 
 const { locale } = useI18n()
+
+const linkedInUrl =
+  'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7345713189680037888?collapsed=1'
+
+const images = [
+  {
+    id: 1,
+    img: '/Dashboard - Desktop.png',
+    title: {
+      en: 'MyTracker - Trainer Dashboard',
+      he: 'MyTracker - דאשבורד למאמן',
+    },
+    class: 'dashboard',
+  },
+  {
+    id: 2,
+    img: '/Exercise Details.png',
+    title: {
+      en: 'MyTracker - Exercise Details',
+      he: 'MyTracker - עמוד פרטי תרגיל',
+    },
+    class: 'exercise-details',
+  },
+  {
+    id: 3,
+    img: '/Food Details.png',
+    title: { en: 'MyTracker - Food Details', he: 'MyTracker - עמוד פרטי מזון' },
+    class: 'food-details',
+  },
+]
 
 const projects = ref([
   {
@@ -238,5 +299,81 @@ const openLink = (url) => {
 .projects-card-actions {
   display: flex;
   gap: $spacing-sm;
+}
+
+.media-header {
+  margin-top: $spacing-2xl;
+}
+
+.media-container {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  justify-items: center;
+  align-items: start;
+
+  margin-top: $spacing-2xl;
+
+  @media (max-width: $breakpoint-xl) {
+    iframe {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+      max-width: 350px;
+      max-height: 620px;
+    }
+  }
+
+  * {
+    border-radius: $radius-lg;
+  }
+
+  h5 {
+    margin-bottom: $spacing-sm;
+  }
+  .dashboard {
+    grid-row: 2 / -1;
+    grid-column: 1 / -1;
+    height: fit-content;
+    img {
+      width: 100%;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+    @media (max-width: $breakpoint-xl) {
+      grid-row: 2 / 3;
+      grid-column: 1 / -1;
+    }
+  }
+  .exercise-details {
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+    // height: 100%;
+    @media (max-width: $breakpoint-xl) {
+      grid-row: 3 / 4;
+      grid-column: 1 / 2;
+    }
+    @media (max-width: $breakpoint-md) {
+      grid-row: 2 / 3;
+      grid-column: 1 / -1;
+    }
+  }
+  .food-details {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    // height: 100%;
+    @media (max-width: $breakpoint-xl) {
+      grid-row: 3 / 4;
+      grid-column: 3 / -1;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      grid-row: 3 / 4;
+
+      grid-column: 1 / -1;
+    }
+  }
 }
 </style>

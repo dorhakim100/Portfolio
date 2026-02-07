@@ -118,6 +118,7 @@ import { useI18n } from 'vue-i18n'
 import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
+import emailjs from '@emailjs/browser'
 
 const { t, locale } = useI18n()
 
@@ -150,11 +151,14 @@ const socialLinks = [
   },
 ]
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   // Handle form submission
   console.log('Form submitted:', form.value)
-  alert(t('contact.submitSuccess'))
-  form.value = { name: '', email: '', message: '' }
+  // alert(t('contact.submitSuccess'))
+  try {
+    const res = await emailjs.sendForm()
+    form.value = { name: '', email: '', message: '' }
+  } catch (err) {}
 }
 </script>
 

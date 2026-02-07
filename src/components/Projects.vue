@@ -160,6 +160,8 @@ const openLink = (url) => {
   }
 
   .projects-card {
+    display: grid;
+    align-items: start;
   }
 
   .projects-card-image {

@@ -5,7 +5,7 @@ const STORAGE_KEY = 'portfolioPrefs'
 
 const defaultPrefs = {
   lang: 'en',
-  isDarkMode: false
+  isDarkMode: true,
 }
 
 // Get preferences from localStorage or use defaults
@@ -73,6 +73,6 @@ export const usePreferences = () => {
     prefs,
     setLanguage,
     toggleDarkMode,
-    setDarkMode
+    setDarkMode,
   }
 }

@@ -5,7 +5,7 @@
   >
     <div class="about-container">
       <header
-        class="about-header text-center scroll-in-up"
+        class="about-header text-center scroll-in-up opacity-animation"
         v-scroll-in
       >
         <h2 class="heading-2">{{ $t('about.title') }}</h2>
@@ -16,7 +16,7 @@
 
       <div class="about-content">
         <div
-          class="about-text scroll-in-left"
+          class="about-text scroll-in-left opacity-animation"
           v-scroll-in
           data-scroll-delay="60"
         >
@@ -38,7 +38,7 @@
         </div>
 
         <div
-          class="about-skills scroll-in-right"
+          class="about-skills scroll-in-right opacity-animation"
           v-scroll-in
           data-scroll-delay="120"
         >
@@ -123,7 +123,7 @@ const scrollToSection = (sectionId) => {
 
 .about-container {
   padding: 1em;
-  padding-top: $spacing-md;
+  padding-top: calc(2em + $spacing-md);
   // layout
 }
 

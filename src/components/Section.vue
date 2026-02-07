@@ -1,5 +1,8 @@
 <template>
-  <section :id="id" :class="['section', `section-${variant}`]">
+  <section
+    :id="id"
+    :class="['section', `section-${variant}`]"
+  >
     <div class="container section-container">
       <slot />
     </div>
@@ -22,7 +25,7 @@ defineProps({
 @import '../styles/mixins';
 
 .section {
-  padding: $spacing-2xl 0;
+  padding: 1em 0;
   @include respond-to(md) {
     padding: $spacing-3xl 0;
   }

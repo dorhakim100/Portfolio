@@ -30,7 +30,7 @@ export default {
   projects: {
     title: 'My Best Projects',
     description:
-      'Some of the projects are for clients, and some are personal self learning projects.',
+      'This selection of projects contains both projects for clients and personal self learning projects.',
   },
   contact: {
     title: 'Get In Touch',

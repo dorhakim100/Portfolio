@@ -4,9 +4,13 @@
       class="language-toggle-button"
       :class="{ 'language-toggle-button-active': prefs.isDarkMode }"
       @click="toggleDarkMode"
-      :aria-label="prefs.isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+      :aria-label="
+        prefs.isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
+      "
     >
-      <span class="language-toggle-icon">{{ prefs.isDarkMode ? '🌙' : '☀️' }}</span>
+      <span class="language-toggle-icon"
+        ><i :class="prefs.isDarkMode ? 'pi pi-moon' : 'pi pi-sun'"></i
+      ></span>
     </button>
     <div class="language-toggle-divider"></div>
     <button
@@ -32,7 +36,11 @@
 import { usePreferences } from '../composables/usePreferences'
 import { useI18n } from 'vue-i18n'
 
-const { prefs, setLanguage: setPrefsLanguage, toggleDarkMode } = usePreferences()
+const {
+  prefs,
+  setLanguage: setPrefsLanguage,
+  toggleDarkMode,
+} = usePreferences()
 const { locale } = useI18n()
 
 const setLanguage = (lang) => {

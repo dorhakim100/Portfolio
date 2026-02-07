@@ -5,7 +5,7 @@
   >
     <div class="contact-container">
       <header
-        class="contact-header text-center scroll-in-up"
+        class="contact-header text-center scroll-in-up opacity-animation"
         v-scroll-in
       >
         <h2 class="heading-2">{{ $t('contact.title') }}</h2>
@@ -16,7 +16,7 @@
 
       <div class="contact-content">
         <div
-          class="contact-info scroll-in-left"
+          class="contact-info scroll-in-left opacity-animation"
           v-scroll-in
           data-scroll-delay="60"
         >
@@ -46,7 +46,7 @@
         </div>
 
         <CustomCard
-          class="contact-form-card scroll-in-right"
+          class="contact-form-card scroll-in-right opacity-animation"
           v-scroll-in
           data-scroll-delay="120"
         >
@@ -154,7 +154,7 @@ const handleSubmit = async () => {
 .contact-container {
   padding: 1em;
 
-  padding-top: $spacing-md;
+  padding-top: calc(2em + $spacing-md);
 }
 
 .contact-header {

@@ -6,7 +6,7 @@
     <div class="container hero-container">
       <div class="hero-content">
         <div
-          class="hero-text scroll-in-up"
+          class="hero-text scroll-in-up opacity-animation"
           v-scroll-in
         >
           <h1 class="hero-title">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div
-          class="hero-visual scroll-in-scale"
+          class="hero-visual scroll-in-scale opacity-animation"
           v-scroll-in
           data-scroll-delay="80"
         >

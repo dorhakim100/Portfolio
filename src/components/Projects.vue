@@ -5,7 +5,7 @@
   >
     <div class="projects-container">
       <header
-        class="projects-header text-center scroll-in-up"
+        class="projects-header text-center scroll-in-up opacity-animation"
         v-scroll-in
       >
         <h2 class="heading-2">{{ $t('projects.title') }}</h2>
@@ -18,7 +18,7 @@
         <CustomCard
           v-for="(project, index) in projects"
           :key="project.id"
-          class="projects-card scroll-in-up"
+          class="projects-card scroll-in-up opacity-animation"
           v-scroll-in
           :data-scroll-delay="index * 70"
         >
@@ -148,7 +148,7 @@ const openLink = (url) => {
 
 .projects-container {
   padding: 1em;
-  padding-top: $spacing-md;
+  padding-top: calc(2em + $spacing-md);
 }
 
 .projects-header {
@@ -185,6 +185,9 @@ const openLink = (url) => {
   // width: 100%;
 
   // max-height: 200px;
+  // max-width: 150px;
+
+  margin: 0 auto;
   margin-bottom: $spacing-md;
   border-radius: $radius-md;
   overflow: hidden;
@@ -192,10 +195,11 @@ const openLink = (url) => {
   align-items: center;
   justify-content: center;
   border-radius: $radius-lg;
-  img {
-    width: 100%;
+  // width: 100%;
 
-    // max-height: 200px;
+  img {
+    height: 200px;
+    max-width: 200px;
     // max-width: 150px;
     object-fit: scale-down;
 

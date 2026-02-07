@@ -3,7 +3,7 @@
     class="navbar"
     :class="{ 'navbar-scrolled': scrolled }"
   >
-    <div class="container navbar-container">
+    <div class="navbar-container">
       <a
         href="#home"
         class="navbar-logo"
@@ -88,6 +88,7 @@ onUnmounted(() => {
 @import '../styles/mixins';
 
 .navbar {
+  padding: 0 1em;
   position: fixed;
   top: 0;
   left: 0;
@@ -117,6 +118,7 @@ onUnmounted(() => {
   gap: $spacing-md;
   padding-top: $spacing-md;
   padding-bottom: $spacing-md;
+  align-items: center;
 }
 
 .navbar-logo {
@@ -152,6 +154,7 @@ onUnmounted(() => {
   height: 24px;
   padding: 0;
   background: transparent;
+  margin-top: 0.5em;
   @include respond-to(md) {
     display: none;
   }
@@ -200,7 +203,7 @@ onUnmounted(() => {
     gap: $spacing-lg;
   }
   background: transparent !important;
-  @media (max-width: $breakpoint-sm) {
+  @media (max-width: $breakpoint-md) {
     &.navbar-menu-open {
       background: white !important;
       &.dark-mode {

@@ -25,6 +25,14 @@ $scroll-offset-mobile: 24px;
   }
 }
 
+.opacity-animation {
+  transition: opacity $scroll-duration $scroll-ease;
+  opacity: 0;
+  &.is-in-view {
+    opacity: 1;
+  }
+}
+
 .scroll-in-up {
   transform: translateY($scroll-offset-mobile);
   @media (min-width: 768px) {

@@ -3,13 +3,13 @@
     id="projects"
     variant="dark"
   >
-    <div class="projects">
-      <div class="projects-header text-center fade-in">
+    <div class="projects-container">
+      <header class="projects-header text-center fade-in">
         <h2 class="heading-2">{{ $t('projects.title') }}</h2>
         <p class="text-body projects-header-description">
           {{ $t('projects.description') }}
         </p>
-      </div>
+      </header>
 
       <div class="projects-grid">
         <CustomCard
@@ -22,11 +22,10 @@
             <div class="projects-card-image">
               <img
                 :src="project.img"
-                alt="Project Image"
+                alt=""
               />
             </div>
           </template>
-
           <template #default>
             <h3 class="heading-3 projects-card-title text-primary">
               {{ project.title[locale] }}
@@ -39,12 +38,10 @@
                 v-for="tag in project.tags"
                 :key="tag"
                 class="projects-tag"
+                >{{ tag }}</span
               >
-                {{ tag }}
-              </span>
             </div>
           </template>
-
           <template #footer>
             <div class="projects-card-actions">
               <CustomButton
@@ -62,10 +59,10 @@
                 {{ $t('common.backend') }}
               </CustomButton>
               <CustomButton
+                v-if="project.link"
                 variant="ghost"
                 size="sm"
                 @click="openLink(project.link)"
-                v-if="project.link"
               >
                 {{ $t('common.link') }}
               </CustomButton>
@@ -79,10 +76,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
-import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 
@@ -99,7 +96,6 @@ const projects = ref([
     },
     img: '/public/sportclub.webp',
     tags: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-    link: '#',
     frontend: 'https://github.com/dorhakim100/Sport-Club-Front',
     backend: 'https://github.com/dorhakim100/SportClub-BackEnd',
     link: 'https://www.moadonsport.com',
@@ -132,16 +128,13 @@ const projects = ref([
       'Node.js',
       'PostgreSQL',
     ],
-
     frontend: 'https://github.com/dorhakim100/CamJam-Front',
     backend: 'https://github.com/dorhakim100/CamJam-Back',
   },
 ])
 
 const openLink = (url) => {
-  if (url && url !== '#') {
-    window.open(url, '_blank')
-  }
+  if (url && url !== '#') window.open(url, '_blank')
 }
 </script>
 
@@ -149,103 +142,84 @@ const openLink = (url) => {
 @import '../styles/variables';
 @import '../styles/mixins';
 
-.projects {
-  &-header {
-    margin-bottom: $spacing-2xl;
+.projects-container {
+  // layout
+}
 
-    &-description {
-      max-width: 600px;
-      margin: $spacing-md auto 0;
-    }
+.projects-header {
+  margin-bottom: $spacing-2xl;
+}
+
+.projects-header-description {
+  max-width: 600px;
+  margin: $spacing-md auto 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  @include respond-to(sm) {
+    grid-template-columns: repeat(1, 1fr);
   }
-
-  .projects-card {
-    display: grid;
-    align-items: start;
+  @include respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  .projects-card-image {
+.projects-card {
+  @include slide-up;
+  animation-fill-mode: both;
+  display: grid;
+  align-items: start;
+}
+
+.projects-card-image {
+  width: 100%;
+  height: 200px;
+  margin-bottom: $spacing-md;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-lg;
+  img {
+    // width: 100%;
+
+    max-height: 200px;
+    object-fit: scale-down;
     border-radius: $radius-md;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      height: 200px;
-      object-fit: cover;
-      border-radius: $radius-md;
-    }
   }
-  &-card-title {
-    margin-bottom: $spacing-sm;
-  }
+}
 
-  &-card-description {
-    margin-bottom: $spacing-md;
-  }
+.projects-card-title {
+  margin-bottom: $spacing-sm;
+}
 
-  &-grid {
-    display: grid;
+.projects-card-description {
+  margin-bottom: $spacing-md;
+}
 
-    grid-template-columns: 1fr;
-    gap: $spacing-lg;
+.projects-tags {
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-md;
+}
 
-    @include respond-to(sm) {
-      grid-template-columns: repeat(1, 1fr);
-    }
+.projects-tag {
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(99, 102, 236, 0.1);
+  color: $primary-light;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
 
-    @include respond-to(lg) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  &-card {
-    @include slide-up;
-    animation-fill-mode: both;
-  }
-
-  &-card-image {
-    width: 100%;
-    height: 200px;
-    margin-bottom: $spacing-md;
-    border-radius: $radius-md;
-    overflow: hidden;
-  }
-
-  &-image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      $primary-color 0%,
-      $secondary-color 100%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-  }
-
-  &-tags {
-    align-self: end;
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-xs;
-    margin-bottom: $spacing-md;
-  }
-
-  &-tag {
-    padding: $spacing-xs $spacing-sm;
-    background: rgba(99, 102, 236, 0.1);
-    color: $primary-light;
-    border-radius: $radius-sm;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
-  }
-
-  &-card-actions {
-    display: flex;
-    gap: $spacing-sm;
-  }
+.projects-card-actions {
+  display: flex;
+  gap: $spacing-sm;
 }
 </style>

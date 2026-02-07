@@ -1,14 +1,19 @@
 <template>
   <nav
     class="navbar"
-    :class="{ 'navbar--scrolled': scrolled }"
+    :class="{ 'navbar-scrolled': scrolled }"
   >
     <div class="container navbar-container">
+      <a
+        href="#home"
+        class="navbar-logo"
+        >Portfolio</a
+      >
       <div class="navbar-right">
         <LanguageToggle />
         <button
           class="navbar-toggle"
-          :class="{ 'navbar-toggle--active': mobileMenuOpen }"
+          :class="{ 'navbar-toggle-active': mobileMenuOpen }"
           @click="toggleMobileMenu"
           aria-label="Toggle menu"
         >
@@ -18,7 +23,7 @@
         </button>
         <ul
           class="navbar-menu"
-          :class="{ 'navbar-menu--open': mobileMenuOpen }"
+          :class="{ 'navbar-menu-open': mobileMenuOpen }"
         >
           <li
             v-for="item in menuItems"
@@ -29,9 +34,8 @@
               :href="item.href"
               class="navbar-link"
               @click="handleNavClick"
+              >{{ $t(item.key) }}</a
             >
-              {{ $t(item.key) }}
-            </a>
           </li>
         </ul>
       </div>
@@ -41,10 +45,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 import LanguageToggle from './LanguageToggle.vue'
-
-const { t } = useI18n()
 
 const mobileMenuOpen = ref(false)
 const scrolled = ref(false)
@@ -91,152 +92,133 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   transition: all $transition-base;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-
   .dark-mode & {
     background: rgba(31, 41, 55, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+}
 
-  &--scrolled {
-    box-shadow: $shadow-md;
+.navbar-scrolled {
+  box-shadow: $shadow-md;
+}
+
+.navbar-container {
+  @include flex-between;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+}
+
+.navbar-logo {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+  transition: color $transition-fast;
+  &:hover {
+    color: $primary-dark;
   }
+}
 
-  &-container {
-    @include flex-between;
-    padding-top: $spacing-md;
-    padding-bottom: $spacing-md;
-  }
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  width: 100%;
+  justify-content: flex-end;
+}
 
-  &-right {
-    display: flex;
-    align-items: center;
-    gap: $spacing-md;
-  }
-
-  &-brand {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
-    color: $primary-color;
-  }
-
-  &-logo {
-    transition: color $transition-fast;
-
-    &:hover {
-      color: $primary-dark;
-    }
-  }
-
-  &-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    background: transparent;
-
-    @include respond-to(md) {
-      display: none;
-    }
-
-    span {
-      width: 100%;
-      height: 2px;
-      background: $text-primary;
-      border-radius: $radius-full;
-      transition: all $transition-base;
-
-      .dark-mode & {
-        background: rgba(255, 255, 255, 0.9);
-      }
-    }
-
-    &--active {
-      span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-
-      span:nth-child(2) {
-        opacity: 0;
-      }
-
-      span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-      }
-    }
-  }
-
-  &-menu {
+.navbar-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  @include respond-to(md) {
     display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    box-shadow: $shadow-lg;
-    padding: $spacing-md;
-    gap: $spacing-sm;
-
+  }
+  span {
+    width: 100%;
+    height: 2px;
+    background: $text-primary;
+    border-radius: $radius-full;
+    transition: all $transition-base;
     .dark-mode & {
-      background: $bg-dark-secondary;
-    }
-
-    @include respond-to(md) {
-      display: flex;
-      flex-direction: row;
-      position: static;
-      background: transparent;
-      box-shadow: none;
-      padding: 0;
-      gap: $spacing-lg;
-    }
-
-    &--open {
-      display: flex;
+      background: rgba(255, 255, 255, 0.9);
     }
   }
+}
 
-  &-item {
-    list-style: none;
+.navbar-toggle-active {
+  span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
   }
+  span:nth-child(2) {
+    opacity: 0;
+  }
+  span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+}
 
-  &-link {
-    display: block;
-    padding: $spacing-sm $spacing-md;
-    color: $text-primary;
-    font-weight: $font-weight-medium;
-    border-radius: $radius-md;
-    transition: all $transition-fast;
+.navbar-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: $shadow-lg;
+  padding: $spacing-md;
+  gap: $spacing-sm;
 
-    .dark-mode & {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    @include respond-to(md) {
-      padding: $spacing-xs $spacing-sm;
-    }
-
-    &:hover {
-      color: $primary-color;
-      background: $bg-secondary;
-
+  @include respond-to(md) {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    gap: $spacing-lg;
+  }
+  background: transparent !important;
+  @include respond-to(sm) {
+    &.navbar-menu-open {
+      background: white !important;
       .dark-mode & {
-        background: rgba(255, 255, 255, 0.1);
+        background: $bg-dark-secondary !important;
       }
     }
   }
+}
 
-  .navbar-right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.navbar-menu-open {
+  display: flex;
+}
+
+.navbar-item {
+  list-style: none;
+}
+
+.navbar-link {
+  display: block;
+  padding: $spacing-sm $spacing-md;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  .dark-mode & {
+    color: rgba(255, 255, 255, 0.9);
   }
-
-  .navbar-menu {
-    background-color: transparent;
+  @include respond-to(md) {
+    padding: $spacing-xs $spacing-sm;
+  }
+  &:hover {
+    color: $primary-color;
+    background: $bg-secondary;
+    .dark-mode & {
+      background: rgba(255, 255, 255, 0.1);
+    }
   }
 }
 </style>

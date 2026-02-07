@@ -2,7 +2,7 @@
   <div
     :class="[
       'custom-card',
-      { 'custom-card--hover': hover, 'custom-card--elevated': elevated },
+      { 'custom-card-hover': hover, 'custom-card-elevated': elevated },
       { 'dark-mode': prefs.isDarkMode },
     ]"
     @click="$emit('click', $event)"
@@ -11,33 +11,28 @@
       v-if="$slots.header"
       class="custom-card-header"
     >
-      <slot name="header"></slot>
+      <slot name="header" />
     </div>
     <div class="custom-card-body">
-      <slot></slot>
+      <slot />
     </div>
     <div
       v-if="$slots.footer"
       class="custom-card-footer"
     >
-      <slot name="footer"></slot>
+      <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { usePreferences } from '../composables/usePreferences'
+
 const { prefs } = usePreferences()
 
 defineProps({
-  hover: {
-    type: Boolean,
-    default: true,
-  },
-  elevated: {
-    type: Boolean,
-    default: false,
-  },
+  hover: { type: Boolean, default: true },
+  elevated: { type: Boolean, default: false },
 })
 
 defineEmits(['click'])
@@ -55,37 +50,33 @@ defineEmits(['click'])
   border: 1px solid rgba(0, 0, 0, 0.05);
   display: grid;
   grid-template-columns: 1fr;
+}
 
-  &--hover {
-    @include hover-lift;
-  }
+.custom-card-hover {
+  // @include hover-lift;
+}
 
-  &--elevated {
-    box-shadow: $shadow-lg;
-  }
+.custom-card-elevated {
+  box-shadow: $shadow-lg;
+}
 
-  &-header {
-    margin-bottom: $spacing-md;
-    padding-bottom: $spacing-md;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  }
+.custom-card-header {
+  margin-bottom: $spacing-md;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-  &-body {
-    color: $text-primary;
-    // Content area
-  }
+.custom-card-body {
+  color: $text-primary;
+}
 
-  &-footer {
-    margin-top: $spacing-md;
-    padding-top: $spacing-md;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  .custom-card-footer {
-    align-self: end;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.custom-card-footer {
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  align-self: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="language-toggle">
+  <div class="language-toggle-container">
     <button
       class="language-toggle-button"
-      :class="{ 'language-toggle-button--active': prefs.isDarkMode }"
+      :class="{ 'language-toggle-button-active': prefs.isDarkMode }"
       @click="toggleDarkMode"
       :aria-label="prefs.isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
     >
@@ -11,7 +11,7 @@
     <div class="language-toggle-divider"></div>
     <button
       class="language-toggle-button"
-      :class="{ 'language-toggle-button--active': prefs.lang === 'en' }"
+      :class="{ 'language-toggle-button-active': prefs.lang === 'en' }"
       @click="setLanguage('en')"
       aria-label="Switch to English"
     >
@@ -19,7 +19,7 @@
     </button>
     <button
       class="language-toggle-button"
-      :class="{ 'language-toggle-button--active': prefs.lang === 'he' }"
+      :class="{ 'language-toggle-button-active': prefs.lang === 'he' }"
       @click="setLanguage('he')"
       aria-label="Switch to Hebrew"
     >
@@ -45,7 +45,7 @@ const setLanguage = (lang) => {
 @import '../styles/variables';
 @import '../styles/mixins';
 
-.language-toggle {
+.language-toggle-container {
   display: flex;
   align-items: center;
   gap: $spacing-xs;
@@ -53,11 +53,9 @@ const setLanguage = (lang) => {
   background: rgba(255, 255, 255, 0.1);
   border-radius: $radius-lg;
   backdrop-filter: blur(10px);
-
   .dark-mode & {
     background: rgba(0, 0, 0, 0.3);
   }
-
   @include respond-to(md) {
     gap: $spacing-sm;
     padding: $spacing-xs $spacing-sm;
@@ -79,29 +77,25 @@ const setLanguage = (lang) => {
   transition: all $transition-fast;
   cursor: pointer;
   border: none;
-
   .dark-mode & {
     color: rgba(255, 255, 255, 0.9);
   }
-
   &:hover {
     background: rgba(99, 102, 241, 0.1);
     color: $primary-color;
-
     .dark-mode & {
       background: rgba(255, 255, 255, 0.1);
       color: white;
     }
   }
+}
 
-  &--active {
-    background: $primary-color;
+.language-toggle-button-active {
+  background: $primary-color;
+  color: white;
+  &:hover {
+    background: $primary-dark;
     color: white;
-
-    &:hover {
-      background: $primary-dark;
-      color: white;
-    }
   }
 }
 
@@ -114,7 +108,6 @@ const setLanguage = (lang) => {
   height: 24px;
   background: rgba(0, 0, 0, 0.1);
   margin: 0 $spacing-xs;
-
   .dark-mode & {
     background: rgba(255, 255, 255, 0.2);
   }

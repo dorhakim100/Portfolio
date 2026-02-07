@@ -3,13 +3,13 @@
     id="contact"
     variant="accent"
   >
-    <div class="contact">
-      <div class="contact-header text-center fade-in">
+    <div class="contact-container">
+      <header class="contact-header text-center fade-in">
         <h2 class="heading-2">{{ $t('contact.title') }}</h2>
         <p class="text-body contact-header-description">
           {{ $t('contact.description') }}
         </p>
-      </div>
+      </header>
 
       <div class="contact-content">
         <div class="contact-info slide-up">
@@ -19,7 +19,6 @@
           <p class="text-body contact-info-description">
             {{ $t('contact.connectDescription') }}
           </p>
-
           <div class="contact-links">
             <a
               v-for="link in socialLinks"
@@ -31,7 +30,7 @@
             >
               <img
                 :src="link.icon"
-                alt="Social Icon"
+                alt=""
                 class="contact-link-icon"
               />
               <span class="contact-link-text">{{ link.name[locale] }}</span>
@@ -39,51 +38,46 @@
           </div>
         </div>
 
-        <div class="contact-form-wrapper scale-in">
-          <CustomCard class="contact-form-card">
-            <h3 class="heading-3 contact-form-title text-primary">
-              {{ $t('contact.sendMessage') }}
-            </h3>
-            <form
-              class="contact-form"
-              @submit.prevent="handleSubmit"
-              ref="form"
+        <CustomCard class="contact-form-card scale-in">
+          <h3 class="heading-3 contact-form-title text-primary">
+            {{ $t('contact.sendMessage') }}
+          </h3>
+          <form
+            class="contact-form"
+            @submit.prevent="handleSubmit"
+            ref="form"
+          >
+            <input
+              v-model="formValues.name"
+              type="text"
+              name="name"
+              :placeholder="$t('contact.namePlaceholder')"
+              required
+            />
+            <input
+              v-model="formValues.email"
+              type="email"
+              name="email"
+              placeholder="youremail@example.com"
+              required
+            />
+            <textarea
+              v-model="formValues.message"
+              name="message"
+              :placeholder="$t('contact.messagePlaceholder')"
+              required
+            />
+            <CustomButton
+              variant="primary"
+              size="lg"
+              type="submit"
+              :full-width="true"
+              :loading="isLoading"
             >
-              <input
-                v-model="formValues.name"
-                type="text"
-                name="name"
-                :placeholder="$t('contact.namePlaceholder')"
-                required
-              />
-
-              <input
-                v-model="formValues.email"
-                type="email"
-                name="email"
-                placeholder="youremail@example.com"
-                required
-              />
-
-              <textarea
-                v-model="formValues.message"
-                name="message"
-                :placeholder="$t('contact.messagePlaceholder')"
-                required
-              />
-
-              <CustomButton
-                variant="primary"
-                size="lg"
-                type="submit"
-                :full-width="true"
-                :loading="isLoading"
-              >
-                {{ $t('contact.submit') }}
-              </CustomButton>
-            </form>
-          </CustomCard>
-        </div>
+              {{ $t('contact.submit') }}
+            </CustomButton>
+          </form>
+        </CustomCard>
       </div>
     </div>
   </Section>
@@ -97,16 +91,9 @@ import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 import emailjs from '@emailjs/browser'
 
-const { t, locale } = useI18n()
-
+const { locale } = useI18n()
 const form = ref(null)
-
-const formValues = ref({
-  name: '',
-  email: '',
-  message: '',
-})
-
+const formValues = ref({ name: '', email: '', message: '' })
 const isLoading = ref(false)
 
 const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -138,15 +125,8 @@ const socialLinks = [
 
 const handleSubmit = async () => {
   isLoading.value = true
-
   try {
-    const res = await emailjs.sendForm(
-      serviceId,
-      templateId,
-      form.value,
-      publicKey
-    )
-
+    await emailjs.sendForm(serviceId, templateId, form.value, publicKey)
     formValues.value = { name: '', email: '', message: '' }
   } catch (err) {
     console.error('Email sending failed:', err)
@@ -160,106 +140,89 @@ const handleSubmit = async () => {
 @import '../styles/variables';
 @import '../styles/mixins';
 
-.contact {
-  &-header {
-    margin-bottom: $spacing-2xl;
+.contact-container {
+  // layout
+}
 
-    &-description {
-      max-width: 600px;
-      margin: $spacing-md auto 0;
+.contact-header {
+  margin-bottom: $spacing-2xl;
+}
+
+.contact-header-description {
+  max-width: 600px;
+  margin: $spacing-md auto 0;
+}
+
+.contact-section-title {
+  margin-bottom: $spacing-lg;
+}
+
+.contact-info-description {
+  margin-bottom: $spacing-xl;
+}
+
+.contact-form-title {
+  margin-bottom: $spacing-lg;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+  @include respond-to(md) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-form-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+  color: white;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(8px);
+    [dir='rtl'] & {
+      transform: translateX(-8px);
     }
   }
+}
 
-  &-section-title {
-    margin-bottom: $spacing-lg;
-  }
+.contact-link-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-sm;
+}
 
-  &-info-description {
-    margin-bottom: $spacing-xl;
-  }
+.contact-link-text {
+  font-weight: $font-weight-medium;
+}
 
-  &-form-title {
-    margin-bottom: $spacing-lg;
-  }
-
-  &-content {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-2xl;
-
-    @include respond-to(md) {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-  }
-
-  &-info {
-    flex: 1;
-  }
-
-  &-form-wrapper {
-    flex: 1;
-  }
-
-  &-form-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-  }
-
-  &-links {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
-  }
-
-  &-link {
-    display: flex;
-    align-items: center;
-    gap: $spacing-md;
-    padding: $spacing-md;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: $radius-lg;
-    transition: all $transition-base;
-    color: white;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(8px);
-
-      [dir='rtl'] & {
-        transform: translateX(-8px);
-      }
-    }
-  }
-
-  &-link-icon {
-    width: 24px;
-    height: 24px;
-    border-radius: $radius-sm;
-  }
-
-  &-link-text {
-    font-weight: $font-weight-medium;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xs;
-  }
-
-  label {
-    font-weight: $font-weight-medium;
-    color: $text-primary;
-    font-size: $font-size-sm;
-  }
-
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
   input,
   textarea {
     padding: $spacing-sm $spacing-md;
@@ -270,18 +233,15 @@ const handleSubmit = async () => {
     transition: all $transition-fast;
     background: white;
     color: $text-primary;
-
     &:focus {
       outline: none;
       border-color: $primary-color;
       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
-
     &::placeholder {
       color: $text-light;
     }
   }
-
   textarea {
     resize: vertical;
     min-height: 120px;

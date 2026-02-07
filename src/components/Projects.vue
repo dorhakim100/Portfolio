@@ -149,6 +149,9 @@ const openLink = (url) => {
 .projects-container {
   padding: 1em;
   padding-top: calc(2em + $spacing-md);
+  @media (max-width: $breakpoint-sm) {
+    padding-top: calc(5em + $spacing-md);
+  }
 }
 
 .projects-header {

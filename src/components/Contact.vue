@@ -155,6 +155,9 @@ const handleSubmit = async () => {
   padding: 1em;
 
   padding-top: calc(2em + $spacing-md);
+  @media (max-width: $breakpoint-sm) {
+    padding-top: calc(5em + $spacing-md);
+  }
 }
 
 .contact-header {

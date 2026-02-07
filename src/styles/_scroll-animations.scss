@@ -1,0 +1,99 @@
+@import './variables';
+
+// Scroll-in animations: elements transition in when .is-in-view, reverse when leaving.
+// Use with v-scroll-in directive. Respects prefers-reduced-motion.
+
+$scroll-duration: 0.7s;
+$scroll-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$scroll-offset: 32px;
+$scroll-offset-mobile: 24px;
+
+// Base: all scroll-in elements fade + transform; opacity transitions on enter/leave
+[class^='scroll-in-'] {
+  opacity: 0;
+  transition: opacity $scroll-duration $scroll-ease,
+    transform $scroll-duration $scroll-ease;
+
+  &.is-in-view {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
+.scroll-in-up {
+  transform: translateY($scroll-offset-mobile);
+  @media (min-width: 768px) {
+    transform: translateY($scroll-offset);
+  }
+  &.is-in-view {
+    transform: translateY(0);
+  }
+}
+
+.scroll-in-fade {
+  transition: opacity $scroll-duration $scroll-ease;
+  transform: none;
+  &.is-in-view {
+    opacity: 1;
+  }
+}
+
+.scroll-in-scale {
+  transform: scale(0.96);
+  &.is-in-view {
+    transform: scale(1);
+  }
+}
+
+.scroll-in-left {
+  transform: translateX(-#{$scroll-offset-mobile});
+  transition: opacity $scroll-duration $scroll-ease,
+    transform $scroll-duration $scroll-ease;
+  @media (min-width: 768px) {
+    transform: translateX(-#{$scroll-offset});
+  }
+  &.is-in-view {
+    transform: translateX(0);
+  }
+}
+
+[dir='rtl'] .scroll-in-left {
+  transform: translateX($scroll-offset-mobile);
+  transition: opacity $scroll-duration $scroll-ease,
+    transform $scroll-duration $scroll-ease;
+  @media (min-width: 768px) {
+    transform: translateX($scroll-offset);
+  }
+  &.is-in-view {
+    transform: translateX(0);
+  }
+}
+
+.scroll-in-right {
+  transform: translateX($scroll-offset-mobile);
+  transition: opacity $scroll-duration $scroll-ease,
+    transform $scroll-duration $scroll-ease;
+  @media (min-width: 768px) {
+    transform: translateX($scroll-offset);
+  }
+  &.is-in-view {
+    transform: translateX(0);
+  }
+}
+
+[dir='rtl'] .scroll-in-right {
+  transform: translateX(-#{$scroll-offset-mobile});
+  transition: opacity $scroll-duration $scroll-ease,
+    transform $scroll-duration $scroll-ease;
+  @media (min-width: 768px) {
+    transform: translateX(-#{$scroll-offset});
+  }
+  &.is-in-view {
+    transform: translateX(0);
+  }
+}

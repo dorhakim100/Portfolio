@@ -5,7 +5,10 @@
   >
     <div class="container hero-container">
       <div class="hero-content">
-        <div class="hero-text slide-up">
+        <div
+          class="hero-text scroll-in-up"
+          v-scroll-in
+        >
           <h1 class="hero-title">
             {{ $t('hero.title') }}
             <span class="hero-name">{{ $t('hero.name') }}</span>
@@ -29,7 +32,11 @@
             </CustomButton>
           </div>
         </div>
-        <div class="hero-visual scale-in">
+        <div
+          class="hero-visual scroll-in-scale"
+          v-scroll-in
+          data-scroll-delay="80"
+        >
           <div class="hero-image-wrapper">
             <img
               src="/public/profile.jpg"

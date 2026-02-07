@@ -4,7 +4,10 @@
     variant="default"
   >
     <div class="about-container">
-      <header class="about-header text-center fade-in">
+      <header
+        class="about-header text-center scroll-in-up"
+        v-scroll-in
+      >
         <h2 class="heading-2">{{ $t('about.title') }}</h2>
         <p class="text-body about-header-description">
           {{ $t('about.description') }}
@@ -12,7 +15,11 @@
       </header>
 
       <div class="about-content">
-        <div class="about-text slide-up">
+        <div
+          class="about-text scroll-in-left"
+          v-scroll-in
+          data-scroll-delay="60"
+        >
           <h3 class="heading-3 about-section-title">
             {{ $t('about.journey') }}
           </h3>
@@ -30,7 +37,11 @@
           </CustomButton>
         </div>
 
-        <div class="about-skills scale-in">
+        <div
+          class="about-skills scroll-in-right"
+          v-scroll-in
+          data-scroll-delay="120"
+        >
           <h3 class="heading-3 about-section-title">
             {{ $t('about.skills') }}
           </h3>

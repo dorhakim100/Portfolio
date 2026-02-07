@@ -4,7 +4,10 @@
     variant="dark"
   >
     <div class="projects-container">
-      <header class="projects-header text-center fade-in">
+      <header
+        class="projects-header text-center scroll-in-up"
+        v-scroll-in
+      >
         <h2 class="heading-2">{{ $t('projects.title') }}</h2>
         <p class="text-body projects-header-description">
           {{ $t('projects.description') }}
@@ -15,8 +18,9 @@
         <CustomCard
           v-for="(project, index) in projects"
           :key="project.id"
-          class="projects-card"
-          :style="{ animationDelay: `${index * 0.1}s` }"
+          class="projects-card scroll-in-up"
+          v-scroll-in
+          :data-scroll-delay="index * 70"
         >
           <template #header>
             <div class="projects-card-image">
@@ -167,18 +171,20 @@ const openLink = (url) => {
 }
 
 .projects-card {
-  @include slide-up;
-  animation-fill-mode: both;
   display: grid;
   align-items: start;
   @media (max-width: $breakpoint-sm) {
     margin-bottom: $spacing-md;
   }
+  div {
+    max-width: calc(320px - $spacing-md * 2);
+  }
 }
 
 .projects-card-image {
-  width: 100%;
-  height: 200px;
+  // width: 100%;
+
+  // max-height: 200px;
   margin-bottom: $spacing-md;
   border-radius: $radius-md;
   overflow: hidden;
@@ -187,10 +193,12 @@ const openLink = (url) => {
   justify-content: center;
   border-radius: $radius-lg;
   img {
-    // width: 100%;
+    width: 100%;
 
-    max-height: 200px;
+    // max-height: 200px;
+    // max-width: 150px;
     object-fit: scale-down;
+
     border-radius: $radius-md;
   }
 }

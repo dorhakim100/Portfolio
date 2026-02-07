@@ -4,7 +4,10 @@
     variant="accent"
   >
     <div class="contact-container">
-      <header class="contact-header text-center fade-in">
+      <header
+        class="contact-header text-center scroll-in-up"
+        v-scroll-in
+      >
         <h2 class="heading-2">{{ $t('contact.title') }}</h2>
         <p class="text-body contact-header-description">
           {{ $t('contact.description') }}
@@ -12,7 +15,11 @@
       </header>
 
       <div class="contact-content">
-        <div class="contact-info slide-up">
+        <div
+          class="contact-info scroll-in-left"
+          v-scroll-in
+          data-scroll-delay="60"
+        >
           <h3 class="heading-3 contact-section-title">
             {{ $t('contact.connect') }}
           </h3>
@@ -38,7 +45,11 @@
           </div>
         </div>
 
-        <CustomCard class="contact-form-card scale-in">
+        <CustomCard
+          class="contact-form-card scroll-in-right"
+          v-scroll-in
+          data-scroll-delay="120"
+        >
           <h3 class="heading-3 contact-form-title text-primary">
             {{ $t('contact.sendMessage') }}
           </h3>

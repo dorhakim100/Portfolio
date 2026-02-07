@@ -9,7 +9,7 @@ export default {
   hero: {
     title: "Hi, I'm",
     name: 'Dor Hakim',
-    subtitle: 'Developer who loves what he does.',
+    subtitle: 'Full Stack Developer who loves what he does.',
     description:
       'Ever since i was a kid, i was a tech guy. I love solving problems and creating something out of nothing.',
     viewWork: 'View My Work',

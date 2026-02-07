@@ -52,6 +52,7 @@ export default {
     messagePlaceholder: 'Your message...',
     submit: 'Send Message',
     submitSuccess: "Thank you for your message! I'll get back to you soon.",
+    submitError: 'Failed to send message. Please try again later.',
   },
   footer: {
     tagline: 'Building digital experiences with passion and precision.',

@@ -9,9 +9,11 @@
     :type="type"
     @click="$emit('click', $event)"
   >
-    <CustomSpinner v-if="loading && prefs.lang === 'en'" size="20px" />
     <slot />
-    <CustomSpinner v-if="loading && prefs.lang === 'he'" size="20px" />
+    <CustomSpinner
+      v-if="loading"
+      size="20px"
+    />
   </button>
 </template>
 

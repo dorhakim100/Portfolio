@@ -54,6 +54,7 @@ export default {
     messagePlaceholder: 'ההודעה שלך...',
     submit: 'שלח הודעה',
     submitSuccess: 'תודה על ההודעה! אחזור אליך בקרוב.',
+    submitError: 'שליחת ההודעה נכשלה, נסה שוב',
   },
   footer: {
     tagline: 'בונה חוויות דיגיטליות עם תשוקה ודייקנות.',

@@ -50,6 +50,20 @@
           v-scroll-in
           data-scroll-delay="120"
         >
+          <div
+            class="message-container"
+            :class="`${messageOptions.visible ? 'msg' : ''} ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            }`"
+          >
+            <Message
+              v-if="messageOptions.visible"
+              :severity="messageOptions.type"
+              :life="3000"
+              >{{ messageOptions.message }}</Message
+            >
+          </div>
+
           <h3 class="heading-3 contact-form-title text-primary">
             {{ $t('contact.sendMessage') }}
           </h3>
@@ -101,11 +115,20 @@ import Section from './Section.vue'
 import CustomCard from './CustomCard.vue'
 import CustomButton from './CustomButton.vue'
 import emailjs from '@emailjs/browser'
+import Message from 'primevue/message'
+import { usePreferences } from '../composables/usePreferences'
 
 const { locale } = useI18n()
+const { prefs } = usePreferences()
 const form = ref(null)
 const formValues = ref({ name: '', email: '', message: '' })
 const isLoading = ref(false)
+const { t } = useI18n()
+const messageOptions = ref({
+  type: '',
+  message: '',
+  visible: false,
+})
 
 const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
@@ -139,10 +162,34 @@ const handleSubmit = async () => {
   try {
     await emailjs.sendForm(serviceId, templateId, form.value, publicKey)
     formValues.value = { name: '', email: '', message: '' }
+    showMessage('success', t('contact.submitSuccess'))
+    messageOptions.value = {
+      type: 'success',
+      message: t('contact.submitSuccess'),
+      visible: true,
+    }
   } catch (err) {
     console.error('Email sending failed:', err)
+    showMessage('error', t('contact.submitError'))
   } finally {
     isLoading.value = false
+  }
+}
+function showMessage(type, message) {
+  messageOptions.value = {
+    type: type,
+    message: message,
+    visible: true,
+  }
+  setTimeout(() => {
+    hideMessage()
+  }, 3500)
+}
+function hideMessage() {
+  messageOptions.value = {
+    type: '',
+    message: '',
+    visible: false,
   }
 }
 </script>
@@ -200,6 +247,21 @@ const handleSubmit = async () => {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   max-width: 500px;
+  position: relative;
+  .message-container {
+    margin: 1em 1em 0 1em;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 2em);
+
+    .p-message {
+      z-index: 100000;
+    }
+
+    background: rgb(255, 255, 255);
+  }
 }
 
 .contact-links {

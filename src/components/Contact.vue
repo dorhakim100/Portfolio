@@ -141,6 +141,8 @@ const handleSubmit = async () => {
 @import '../styles/mixins';
 
 .contact-container {
+  padding: 1em;
+
   padding-top: $spacing-md;
 }
 

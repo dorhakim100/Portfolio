@@ -4,6 +4,14 @@
 // Spacing utilities
 .container {
   @include container;
+  min-width: 0; // allow shrinking in flex/grid contexts
+
+  // Constrain direct children so they never exceed container width
+  & > * {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
 }
 
 .section {

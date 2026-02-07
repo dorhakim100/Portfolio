@@ -23,7 +23,10 @@
         </button>
         <ul
           class="navbar-menu"
-          :class="{ 'navbar-menu-open': mobileMenuOpen }"
+          :class="{
+            'navbar-menu-open': mobileMenuOpen,
+            'dark-mode': prefs.isDarkMode,
+          }"
         >
           <li
             v-for="item in menuItems"
@@ -46,6 +49,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import LanguageToggle from './LanguageToggle.vue'
+import { usePreferences } from '../composables/usePreferences'
+const { prefs } = usePreferences()
 
 const mobileMenuOpen = ref(false)
 const scrolled = ref(false)
@@ -86,6 +91,7 @@ onUnmounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  // width: 100%;
   right: 0;
   z-index: $z-fixed;
   background: rgba(255, 255, 255, 0.95);
@@ -95,6 +101,10 @@ onUnmounted(() => {
   .dark-mode & {
     background: rgba(31, 41, 55, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @include respond-to(sm) {
+    // width: auto;
   }
 }
 
@@ -117,14 +127,21 @@ onUnmounted(() => {
   &:hover {
     color: $primary-dark;
   }
+
+  @media (max-width: $breakpoint-sm) {
+    display: none;
+  }
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
   gap: $spacing-md;
-  width: 100%;
   justify-content: flex-end;
+  @media (max-width: $breakpoint-sm) {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .navbar-toggle {
@@ -183,10 +200,10 @@ onUnmounted(() => {
     gap: $spacing-lg;
   }
   background: transparent !important;
-  @include respond-to(sm) {
+  @media (max-width: $breakpoint-sm) {
     &.navbar-menu-open {
       background: white !important;
-      .dark-mode & {
+      &.dark-mode {
         background: $bg-dark-secondary !important;
       }
     }

@@ -60,11 +60,13 @@ const scrollToSection = (sectionId) => {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding: 1em;
+  padding-top: calc(100px + $spacing-md);
   padding-bottom: $spacing-2xl;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   position: relative;
   overflow: hidden;
+
   .dark-mode & {
     background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
   }

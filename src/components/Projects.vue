@@ -143,6 +143,7 @@ const openLink = (url) => {
 @import '../styles/mixins';
 
 .projects-container {
+  padding: 1em;
   padding-top: $spacing-md;
 }
 
@@ -157,13 +158,11 @@ const openLink = (url) => {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
   gap: $spacing-lg;
-  @include respond-to(sm) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  @include respond-to(lg) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: $breakpoint-sm) {
+    display: block;
   }
 }
 
@@ -172,6 +171,9 @@ const openLink = (url) => {
   animation-fill-mode: both;
   display: grid;
   align-items: start;
+  @media (max-width: $breakpoint-sm) {
+    margin-bottom: $spacing-md;
+  }
 }
 
 .projects-card-image {

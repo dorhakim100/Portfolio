@@ -111,6 +111,7 @@ const scrollToSection = (sectionId) => {
 @import '../styles/mixins';
 
 .about-container {
+  padding: 1em;
   padding-top: $spacing-md;
   // layout
 }

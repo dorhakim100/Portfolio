@@ -39,7 +39,7 @@
         >
           <div class="hero-image-wrapper">
             <img
-              src="/public/profile.jpg"
+              src="/profile.jpg"
               alt="Hero"
               class="hero-image"
             />

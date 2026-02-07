@@ -114,22 +114,22 @@ const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 const socialLinks = [
   {
     name: { en: 'Phone', he: 'טלפון' },
-    icon: '/public/phone.svg',
+    icon: '/phone.svg',
     url: 'tel:+972542044022',
   },
   {
     name: { en: 'WhatsApp', he: 'וואטסאפ' },
-    icon: '/public/whatsapp.svg',
+    icon: '/whatsapp.svg',
     url: 'https://wa.me/972542044022',
   },
   {
     name: { en: 'GitHub', he: 'גיטהאב' },
-    icon: '/public/github.svg',
+    icon: '/github.svg',
     url: 'https://github.com/dorhakim100',
   },
   {
     name: { en: 'LinkedIn', he: 'לינקדאין' },
-    icon: '/public/linkedin.svg',
+    icon: '/linkedin.svg',
     url: 'https://www.linkedin.com/in/dor-hakim/',
   },
 ]
